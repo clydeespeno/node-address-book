@@ -1,0 +1,47 @@
+{
+  "name": "node-address-book",
+  "version": "0.0.1",
+  "author": "clyde.espeno@gmail,com",
+  "description": "Sample address book in node",
+  "dependencies": {
+    "awilix": "2.2.3",
+    "axios": "^0.15.3",
+    "bluebird": "^3.5.0",
+    "glob": "7.1.1",
+    "koa": "2.2.0",
+    "koa-bodyparser": "4.2.0",
+    "koa-router": "7.0.1",
+    "lodash": "4.17.4"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.0",
+    "babel-core": "6.24.0",
+    "babel-eslint": "7.1.1",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-env": "^1.2.2",
+    "babel-watch": "2.0.6",
+    "chai": "3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "eslint": "3.12.2",
+    "mocha": "3.2.0",
+    "nyc": "10.1.2",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0"
+  },
+  "scripts": {
+    "lint": "eslint src/",
+    "dist:babel": "babel src -d dist --ignore '**/*.spec.js'",
+    "dist:prepare": "cp -r src/conf dist/conf && npm prune --production",
+    "dist:build": "npm install && npm run babel:dist && npm run babel:prepare",
+    "dist:artifact": "zip -rv current.zip dist node_modules package.json .nvmrc",
+    "dist": "npm run dist:build && npm run dist:artifact",
+    "clean": "rm -f current.zip && rm -rf dist",
+    "watch": "babel-watch src/app.js --watch src/config",
+    "debug": "babel-node src/app.js --debug",
+    "cover": "npm run lint && nyc --reporter=lcov --require babel-core/register mocha src/**/*.spec.js && nyc report",
+    "test": "npm run lint && mocha --compilers js:babel-core/register src/**/*.spec.js",
+    "test:only": "mocha --compilers js:babel-core/register",
+    "test:watch": "mocha --compilers js:babel-core/register --watch src/**/*.spec.js"
+  }
+}
