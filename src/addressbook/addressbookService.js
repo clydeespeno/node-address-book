@@ -16,7 +16,7 @@ export default ({contactRepository}) => {
       return contactRepository.filter((c) => c.addressbookId === addressbookId);
     },
 
-    getUniqueContacts: async (aId, bId) => {
+    getUniqueContacts: async(aId, bId) => {
       const [a, b] = await Promise.all([
         contactRepository.filter((c) => c.addressbookId === aId),
         contactRepository.filter((c) => c.addressbookId === bId)

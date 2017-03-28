@@ -6,8 +6,7 @@ export default ({addressbookService}) => {
 
   // create contact
   abRouter.post('/contacts', async (ctx) => {
-    const id = await addressbookService.createContact(ctx.params.id, ctx.request.body);
-    ctx.body = id;
+    ctx.body = await addressbookService.createContact(ctx.params.id, ctx.request.body);
   });
 
   // delete a contact
